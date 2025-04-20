@@ -5,12 +5,14 @@ import streamlit as st
 import os
 import sys
 
-# Add code directory to Python path (optional, adjust if needed)
-sys.path.append('code')  # Relative to the cloned repo root
+# Add code directory to Python path
+sys.path.append('C:/Users/HP/OneDrive/Desktop/AC_Simulator/code')
+from utils import save_data  # Optional
 
-from utils import save_data  # Optional, ensure utils.py is in code/
+# Set working directory
+os.chdir('C:/Users/HP/OneDrive/Desktop/AC_Simulator')
 
-# Streamlit app (no os.chdir needed)
+# Streamlit app
 st.title("AC Optimization Simulator")
 
 # Sidebar for user inputs
@@ -20,9 +22,9 @@ duration_hours = st.sidebar.slider("Simulation Duration (hours)", 1, 48, 24, 1)
 run_button = st.sidebar.button("Run Analysis")
 
 if run_button:
-    # Load and process data using relative path
+    # Load and process data
     try:
-        data = pd.read_csv('results/simulation_results.csv')  # Relative to repo root
+        data = pd.read_csv('results/simulation_results.csv')
         st.write(f"Loaded columns: {data.columns.tolist()}")
         
         required_columns = ['Time (min)', 'Original Temp (°C)', 'Adjusted Temp (°C)', 'Setting', 'Energy Usage']
@@ -106,4 +108,4 @@ if run_button:
         st.write("**Recommendation:** Increase 'Low' setting cooling to 0.2°C and adjust decision logic for 'Medium'/'High' settings.")
 
     except Exception as e:
-        st.error(f"Error in analysis: {e}. Please check results/simulation_results.csv and rerun simulation.py locally.")
+        st.error(f"Error in analysis: {e}. Please check simulation_results.csv and rerun simulation.py.")
