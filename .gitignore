@@ -1,0 +1,10 @@
+# Ignore large data files
+results/simulation_results.csv
+results/*.png
+
+# Ignore Python artifacts
+__pycache__/
+*.pyc
+
+# Ignore OS files
+.DS_Store
